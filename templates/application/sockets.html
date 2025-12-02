@@ -88,18 +88,9 @@
   socket.on("message", (msg) => {
     const li = document.createElement("li");
 
-    if (msg.username && msg.username !== "Anonymous" && !userColors[msg.username]) {
-        const bgClass = bgs[Math.floor(Math.random() * bgs.length)];
-        userColors[msg.username] = bgClass;
-    }
-    else if (userColors[msg.session_id] === undefined) {
-        const bgClass = bgs[Math.floor(Math.random() * bgs.length)];
-        userColors[msg.session_id] = bgClass;
-    }
-
     li.className =
-      `bg-gray-100 border border-gray-200 px-3 py-2 rounded-lg text-sm ${userColors[msg.username] || userColors[msg.session_id]}`;
-    li.textContent = `${msg.username}: ${msg.msg}`;
+      `bg-gray-100 border border-gray-200 px-3 py-2 rounded-lg text-sm`;
+    li.textContent = msg.msg;
 
     list.appendChild(li);
     list.scrollTop = list.scrollHeight; // auto-scroll

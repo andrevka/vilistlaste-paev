@@ -1,0 +1,8 @@
+if (msg.username && msg.username !== "Anonymous" && !userColors[msg.username]) {
+        const bgClass = bgs[Math.floor(Math.random() * bgs.length)];
+        userColors[msg.username] = bgClass;
+    }
+    else if (userColors[msg.session_id] === undefined) {
+        const bgClass = bgs[Math.floor(Math.random() * bgs.length)];
+        userColors[msg.session_id] = bgClass;
+    }
