@@ -13,6 +13,7 @@ from models import create_sqlite_connection, db
 import hello
 import auth
 import chat
+import p2pchat
 import sql
 
 
@@ -33,10 +34,12 @@ app.register_blueprint(chat.br)
 app.register_blueprint(instructions.bp)
 app.register_blueprint(applications.bp)
 app.register_blueprint(sql.bp)
+app.register_blueprint(p2pchat.br)
 
 socketio = SocketIO(app)
 
 chat.register_socketio_handlers(socketio)
+p2pchat.register_socketio_handlers(socketio)
 
 with app.app_context():
     db.init_app(app)
