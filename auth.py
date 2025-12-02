@@ -32,18 +32,12 @@ def signup():
         email = request.form.get("email", "").strip().lower()
         confirm = request.form.get("confirm", "")
 
-        # Validation
-        if not username or not password:
-            return render_template("signup.html", error="Please fill in all fields.")
+        #TODO
 
-        if password != confirm:
-            return render_template("signup.html", error="Passwords do not match.")
-
-        if User.query.filter_by(username=username).first():
-            return render_template("signup.html", error="Username already taken.")
-
-        db.session.add(User(username=username, password=password, email=email))
-        db.session.commit()
+        # Lisa valideerimise loogika
+        # Tagasta viga kui väljad pole täidetud, paroolid ei klapi, või sellise nimega kasutaja juba eksisteerib
+        
+        # Tekita User object ja kasuta db objekti et ssee baasi salvestada
 
         session["username"] = username
 
