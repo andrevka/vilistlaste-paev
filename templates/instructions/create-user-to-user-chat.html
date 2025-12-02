@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Lisame user to user vestluse võimekuse{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Lisame user to user vestluse võimekuse</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+
+    <h2 class="text-xl font-bold mb-4">Nõuded</h2>
+
+    <ul class="list-disc list-inside">
+        <li>Kasutajad saavad saata üksteisele eraviisilisi sõnumeid</li>
+        <li>Kasutajad näevad ainult neid sõnumeid, mis on saadetud neile või mis nad on ise saatnud</li>
+        <li>Sõnumid hoitakse andmebaasis ja neid saab vaadata hiljem</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Sammud</h2>
+
+    <ol class="list-decimal list-inside">
+        <li>Võta aluseks sockets.html ja chat.py failid</li>
+        <li>Looge uus andmebaasi tabel sõnumite salvestamiseks (tuleta meelde ORM, mis uut tabelit meil vaja läheb?)</li>
+        <li>Lisage kasutajate vahelise vestluse loogika</li>
+        <li>Looge kasutajaliides sõnumite saatmiseks ja vastuvõtmiseks</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Ette valmistatud tühjad failid mida muuta on</h2>
+
+    <p class="mt-4"><code>applications/user_to_user_chat/cha.html</code></p>
+    <p class="mt-4"><code>applications/user_to_user_chat/chat.py</code></p>
+
+</div>
+
+{% endblock %}
