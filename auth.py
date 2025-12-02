@@ -39,7 +39,7 @@ def signup():
         
         # Tekita User object ja kasuta db objekti et ssee baasi salvestada
 
-        session["username"] = username
+        # session["username"] = username
 
         return redirect(url_for("home"))
 
