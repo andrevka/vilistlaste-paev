@@ -37,7 +37,7 @@
 
 <script>
 
-    const userColors = {};
+  const userColors = {};
 
   const colors = ["red","orange","amber","yellow","lime","green","emerald","teal","cyan","sky","blue","indigo","violet","purple","fuchsia","pink","rose"];
   const intensity = [100,200,300,400,500,600,700,800,900];
@@ -88,7 +88,7 @@
   socket.on("message", (msg) => {
     const li = document.createElement("li");
 
-    if (msg.username && !userColors[msg.username]) {
+    if (msg.username && msg.username !== "Anonymous" && !userColors[msg.username]) {
         const bgClass = bgs[Math.floor(Math.random() * bgs.length)];
         userColors[msg.username] = bgClass;
     }
@@ -96,9 +96,6 @@
         const bgClass = bgs[Math.floor(Math.random() * bgs.length)];
         userColors[msg.session_id] = bgClass;
     }
-
-    console.log(userColors[msg.username] || userColors[msg.session_id]);
-    console.log(userColors);
 
     li.className =
       `bg-gray-100 border border-gray-200 px-3 py-2 rounded-lg text-sm ${userColors[msg.username] || userColors[msg.session_id]}`;

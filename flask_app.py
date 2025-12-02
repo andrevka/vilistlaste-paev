@@ -6,6 +6,7 @@ import uuid
 
 from sqlalchemy import StaticPool
 
+import applications
 import instructions
 from models import create_sqlite_connection, db
 
@@ -30,6 +31,7 @@ app.register_blueprint(hello.bp)
 app.register_blueprint(auth.br)
 app.register_blueprint(chat.br)
 app.register_blueprint(instructions.bp)
+app.register_blueprint(applications.bp)
 app.register_blueprint(sql.bp)
 
 socketio = SocketIO(app)
