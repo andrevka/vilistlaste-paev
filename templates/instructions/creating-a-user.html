@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Kasutaja tekitamine ja salvestamine{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Kasutaja tekitamine ja salvestamine</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+
+    <p class="mt-4">Lisame võimaluse luua ja salvestada kasutajaid andmebaasi. Sama loogika kehtib ükskõik missuguste andmete baasi salvestamisel. Sellel juhul me lihtsalt salvestame kasutaja andmeid.</p>
+
+    <p class="mt-4">Kasutame User ORM klassi, et luua ja salvestada kasutajaid.</p>
+
+    <p class="mt-4">Avame faili <code>auth.py</code> ja täiendame meetodit <code>signup</code></p>
+
+    <p class="mt-4">Enamus koodist on juba olemas, peame lihtsalt lisama kasutaja loomise ja salvestamise loogika, aga esmalt proovime mõista juba olemasolevat koodi</p>
+
+</div>
+
+{% endblock %}

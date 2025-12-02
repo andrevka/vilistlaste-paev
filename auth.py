@@ -3,7 +3,7 @@ from flask import Blueprint, redirect, render_template, request, session, url_fo
 
 from models import User, db
 
-br = Blueprint("auth", __name__)
+br = Blueprint("auth", __name__, template_folder="templates/application")
 
 
 @br.route("/login", methods=["GET", "POST"])
