@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>Sql harjutamise veebileht</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <div class="bg-white shadow-lg rounded-xl p-10 m-6 ">
+        <h1 class="text-2xl font-bold">Tere tulemast minu veebilehele!</h1>
+        <p>See on näidis veebileht kus saab sql käske harjutada.</p>
+        <form method="post" class="mt-4 mb-4">
+            <input class="w-full border border-gray-300 p-2 rounded" type="text" id="sql-input" name="sql"
+                placeholder="Sisesta SQL käsk">
+            <button class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 mt-2" type="submit">Käivita SQL</button>
+        </form>
+        {% if results %}
+        <h2>Tulemused:</h2>
+        <table class="table-auto border-collapse border border-gray-400">
+            <thead>
+                <tr>
+                    {% for header in headers %}
+                    <th class="border border-gray-300 px-4 py-2">{{ header }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                <tr class="border border-gray-300">
+                    {% for item in row %}
+                    <td class="border border-gray-300 p-2">{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% if error %}
+        <p class="text-red-500">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

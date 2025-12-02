@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Ülevaade{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Ülevaade teooriast</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+    
+    <div class="grid gap-6 sm:grid-cols-2">
+
+      <a href="/instructions/web" class="block bg-white rounded-xl shadow hover:shadow-lg transition p-6">
+        <h3 class="text-xl font-bold mb-2">Veebiarendus</h3>
+        <p class="text-gray-600">Mida tähendab veebiarendus?</p>
+      </a>
+
+      <a href="/instructions/client-server-model" class="block bg-white rounded-xl shadow hover:shadow-lg transition p-6">
+        <h3 class="text-xl font-bold mb-2">Kliendi-serveri mudel</h3>
+        <p class="text-gray-600">Mida tähendab kliendi-serveri mudel?</p>
+      </a>
+
+      <a href="/instructions/frameworks" class="block bg-white rounded-xl shadow hover:shadow-lg transition p-6">
+        <h3 class="text-xl font-bold mb-2">Veebiraamistikud</h3>
+        <p class="text-gray-600">Mis on veebiraamistikud?</p>
+      </a>
+
+      <a href="/instructions/endpoints" class="block bg-cyan-100 rounded-xl shadow hover:shadow-lg transition p-6">
+        <h3 class="text-xl font-bold mb-2">Otspunktid</h3>
+      </a>
+
+      <a href="/instructions/templates" class="block bg-cyan-100 rounded-xl shadow hover:shadow-lg transition p-6">
+        <h3 class="text-xl font-bold mb-2">Mallid</h3>
+      </a>
+
+      <a href="/instructions/javascript" class="block bg-cyan-100 rounded-xl shadow hover:shadow-lg transition p-6">
+        <h3 class="text-xl font-bold mb-2">JavaScript</h3>
+      </a>
+
+      <a href="/instructions/sql" class="block bg-cyan-100 rounded-xl shadow hover:shadow-lg transition p-6">
+        <h3 class="text-xl font-bold mb-2">SQL</h3>
+      </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

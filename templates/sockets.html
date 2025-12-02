@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Live Chat – Python Web Workshop{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Live Chat 💬</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+  <!-- Messages list -->
+  <ul id="messages" class="space-y-2 mb-6 max-h-80 overflow-y-auto">
+    <!-- Messages will be appended here -->
+  </ul>
+
+  <!-- Input form -->
+  <div class="flex space-x-2">
+    <input
+      id="messageInput"
+      class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder="Type your message..."
+    >
+    <button
+      id="sendBtn"
+      class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition"
+    >
+      Send
+    </button>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+
+<!-- Socket.IO client -->
+<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+
+<script>
+
+    const userColors = {};
+
+  const colors = ["red","orange","amber","yellow","lime","green","emerald","teal","cyan","sky","blue","indigo","violet","purple","fuchsia","pink","rose"];
+  const intensity = [100,200,300,400,500,600,700,800,900];
+
+  const bgs = colors.flatMap(c => intensity.map(i => `bg-${c}-${i}`));
+
+  const socket = io();  // Connect to Flask-SocketIO server
+
+  function playBlip() {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "square";          // retro "8bit" vibe
+    osc.frequency.value = 650;    // Hz
+    gain.gain.value = 0.15;       // volume
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.1); // 100ms blip
+  }
+
+
+  const input  = document.getElementById("messageInput");
+  const button = document.getElementById("sendBtn");
+  const list   = document.getElementById("messages");
+
+  // Send message when clicking button
+  button.onclick = () => {
+    const text = input.value.trim();
+    if (!text) return;
+
+    socket.send({msg: text});
+    input.value = "";
+  };
+
+  // Send message when pressing Enter
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      button.click();
+    }
+  });
+
+  // Receive messages
+  socket.on("message", (msg) => {
+    const li = document.createElement("li");
+
+    if (msg.username && !userColors[msg.username]) {
+        const bgClass = bgs[Math.floor(Math.random() * bgs.length)];
+        userColors[msg.username] = bgClass;
+    }
+    else if (userColors[msg.session_id] === undefined) {
+        const bgClass = bgs[Math.floor(Math.random() * bgs.length)];
+        userColors[msg.session_id] = bgClass;
+    }
+
+    console.log(userColors[msg.username] || userColors[msg.session_id]);
+    console.log(userColors);
+
+    li.className =
+      `bg-gray-100 border border-gray-200 px-3 py-2 rounded-lg text-sm ${userColors[msg.username] || userColors[msg.session_id]}`;
+    li.textContent = `${msg.username}: ${msg.msg}`;
+
+    list.appendChild(li);
+    list.scrollTop = list.scrollHeight; // auto-scroll
+  });
+</script>
+
+{% endblock %}

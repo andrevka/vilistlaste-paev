@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}JavaScript{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">JavaScript</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Näidis javascriptiga veebilehest</h2>
+
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-html"><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Minu Veebileht&lt;/title&gt;
+        &lt;script&gt;console.log("Hello world!")&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Tere tulemast minu veebilehele!&lt;/h1&gt;
+        &lt;p&gt;See on näidis veebileht kus jookseb lihtne JavaScript kood.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <p class="mt-4"><a class="text-blue-500 hover:underline" href="http://localhost:8080/instructions/my-page-with-javascript" target="_blank">my-page-with-javascript</a> - Ava see link, et näha JavaScripti konsooli väljundit.</p>
+
+    <p class="mt-4">JavaScript on programmeerimiskeel, mida kasutatakse peamiselt veebilehtede interaktiivsuse ja dünaamilisuse loomiseks. See võimaldab arendajatel luua rikkalikke kasutajaliideseid ja hallata veebirakenduste käitumist kliendi poolel.</p>
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Ülesanded</h2>
+
+    <ul class="list-disc">
+        <li>Lisa templates/instructions/templates/my-page-with-javascript.html faili kahe arvu korrutamise sisendi väljad, nupp mis algatab tehte, ja JavaScripti kood, mis arvutab korrutise ja kuvab selle konsoolis.</li>
+        <li>Kasutage AI abi</li>
+    </ul>
+
+</div>
+
+{% endblock %}

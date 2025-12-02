@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Veebiraamistikud{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Veebiraamistikud</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+    <p>Veebiraamistikud on tööriistad, mis aitavad arendajatel luua veebirakendusi kiiremini ja tõhusamalt. Need pakuvad eelnevalt määratletud komponente ja struktuure, mis lihtsustavad arendamisprotsessi.</p>
+    <p>Populaarsed veebiraamistikud hõlmavad näiteks Flaski ja Django't Pythonis, samuti Reacti ja Angularit JavaScriptis.</p>
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Arendajad saavad keskenduda äriloogikale</h2>
+    <p>Arendajad ei pea tegelema low level asjadega nagu andmebaasi ühendused või serveri seadistamine, vaid saavad keskenduda rakenduse funktsionaalsusele ja kasutajakogemusele.</p>
+
+    <h3 class="text-lg font-semibold mt-6 mb-2">Mida raamistikud tavaliselt sisaldavad</h3>
+    <ul class="list-disc list-inside space-y-2">
+        <li><strong>Routing:</strong> URL-ide kaardistamine vaadetele/komponentidele.</li>
+        <li><strong>Templitseerimine:</strong> HTML-i ja andmete ühendamine (nt Jinja2, JSX).</li>
+        <li><strong>Andmebaasi liides:</strong> ORM või lihtsad päringuvahendid.</li>
+        <li><strong>Autentimine ja autoriseerimine:</strong> kasutajahaldus ja õiguste kontroll.</li>
+        <li><strong>Vigade käsitlemine ja logimine:</strong> lihtsam diagnostika ja jälgimine.</li>
+    </ul>
+
+    <h3 class="text-lg font-semibold mt-6 mb-2">Soovitused projekti struktureerimiseks</h3>
+    <ul class="list-disc list-inside space-y-2">
+        <li><strong>Jagada kood mooduliteks:</strong> eralda äriloogika, andmekiht ja esituse kiht.</li>
+        <li><strong>Kasutada selget kaustastruktuuri:</strong> nt templates, static, models, views/controllers, services.</li>
+        <li><strong>Konfiguratsioon eraldi:</strong> hoia keskkonnapõhine konfiguratsioon eraldi failides või keskkonnamuutujates.</li>
+        <li><strong>Kirjuta testid:</strong> katke äriloogika automaattestidega, et hoida kvaliteeti.</li>
+    </ul>
+
+    <p class="mt-6 italic text-sm text-gray-600">Märkus: tutvume nende teemadega hiljem ja vaatame iga punkti süvitsi.</p>
+
+</div>
+
+{% endblock %}

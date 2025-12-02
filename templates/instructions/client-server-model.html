@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Mallid{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Klient ja server mudel</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+
+    <p class="mt-4">Veebiarenduses kasutatakse sageli klient-server mudelit, kus klient (tavaliselt veebibrauser) saadab päringuid serverile, mis töötleb need päringud ja tagastab vastused.</p>
+    <p class="mt-4">Server võib saata tagasi erinevat tüüpi sisu, sealhulgas HTML-malle, mis kliendi poolt kuvatakse.</p>
+    <p class="mt-4">Kliendi ja serveri vaheline suhtlus toimub tavaliselt HTTP protokolli kaudu, kus klient saadab HTTP päringu ja server vastab HTTP vastusega.</p>
+    <p class="mt-4">Üks server võib olla kliendiks teisele serverile, edastades päringud ja saades vastused tagasi.</p>
+
+    <h2 class="text-xl font-bold mt-6 mb-4">HTTP protokoll</h2>
+
+    <p class="mt-4">HTTP (HyperText Transfer Protocol) on protokoll, mida kasutatakse andmete edastamiseks veebis. See määratleb, kuidas kliendid ja serverid suhtlevad omavahel, kasutades päringuid ja vastuseid.</p>
+    <p class="mt-4">HTTP päringud sisaldavad teavet selle kohta, millist ressurssi klient soovib, ning HTTP vastused sisaldavad tagastatavat sisu, näiteks veebilehekülg või andmeid.</p>
+
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-http"><code>GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0
+</code></pre>
+
+    <p class="mt-4">See näide näitab lihtsat HTTP GET päringut, kus klient küsib serverilt faili <code>index.html</code>.</p>
+    <p class="mt-4">Vaatame päringut kus kasutaja postitab andmeid.</p>
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-http"><code>POST /submit-form HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+
+name=John+Doe&email=johndoe%40example.com</code></pre>
+
+    <p class="mt-4">See näide näitab lihtsat HTTP POST päringut, kus klient saadab serverile vormiandmed.</p>
+
+    <p class="mt-4">Kuidas http server seda parsib ja mis tavaliselt toimub:</p>
+
+    <ol class="list-decimal list-inside space-y-2">
+        <li>Server võtab vastu päringu ja eraldab HTTP meetodi (GET, POST jne), URL-i ja päised.</li>
+        <li>Kui päring on POST päring, server loeb päringu keha, et saada edastatud andmed.</li>
+        <li>Server töötleb päringut vastavalt URL-ile ja meetodile, näiteks otsib faili või salvestab andmed andmebaasi.</li>
+        <li>Lõpuks server koostab HTTP vastuse, mis sisaldab staatust (nt 200 OK), sisu, ning saadab selle kliendile tagasi.</li>
+    </ol>
+
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Lihtne HTTP server Pythonis</h2>
+
+    <p class="mt-4">Teeme pythonis toore http serveri mis suudab päringuid vastu võtta ja töödelda.</p>
+
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-python"><code>from http.server import BaseHTTPRequestHandler, HTTPServer
+
+
+class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(b"Hello, world!")
+
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(b"Received POST request with data: " + post_data)
+
+def run():
+    server = HTTPServer(server_address=("", 8080), RequestHandlerClass=SimpleHTTPRequestHandler)
+    server.serve_forever()
+
+if __name__ == "__main__":
+    run()</code></pre>
+    <p class="mt-4">See lihtne HTTP server suudab vastu võtta nii GET kui ka POST päringuid ning vastata neile vastavalt.</p>
+
+    <p>Veebiraamistikud teevad üldiselt sama asja, kuid pakuvad rohkem funktsioone ja mugavusi, et arendajad saaksid keskenduda oma rakenduste loogikale, mitte madalama taseme HTTP protokolli üksikasjadele.</p>
+
+    <p class="mt-4"> Pane eelnev kood faili simple-http-server.py ja käivita see</p>
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-shell"><code>python simple-http-server.py</code></pre>
+    <p class="mt-4">Ava brauseris aadress <a class="text-blue-500 hover:underline" href="http://localhost:8080" target="_blank">http://localhost:8080</a> et näha GET päringu vastust.</p>
+    <p class="mt-4">Saada POST päring kasutades näiteks tööriista Postman või curl:</p>
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-shell"><code>curl -X POST -d "name=John&email=john%40example.com" http://localhost:8080/submit-form</code></pre>
+    <p class="mt-4">Näed POST päringut terminalis kus server jookseb.</p>
+
+</div>
+
+{% endblock %}

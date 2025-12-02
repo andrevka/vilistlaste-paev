@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Mallid{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Mallid</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Näidis mallist</h2>
+
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-html"><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Minu Veebileht&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Tere tulemast minu veebilehele!&lt;/h1&gt;
+        &lt;p&gt;See on näidis HTML mall.&lt;/p&gt;
+        
+        {{
+            '{% if user_logged_in %}
+            <p>Tere, {{ username }}!</p>;
+        {% else %}
+            <p>Palun logi sisse.</p>
+        {% endif %}'
+        }}
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <ul class="list-disc p-8">
+        <li>Mallide jaoks on erinevad mallikeeled - siin on tegemist jinja2</li>
+        <li>Pane tähele loogika blokke {{'{% if .... %}'}}</li>
+        <li>Pane tähele muutuja kasutamist {{ username }}</li>
+    </ul>
+    
+    <h2 class="text-xl font-bold mt-6 mb-4">Pythoni kood mis malli välja kutsub</h2>
+
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-python"><code>@bp.route('/my-page-template')
+def my_page_template():
+    return render_template("templates/my-page-template.html")
+</code></pre>
+
+    <ul class="list-disc p-8">
+        <li>Kutsume välja endpointi</li>
+        <li>
+            <span>endpoint tagastab ja renderdab malli</span>
+            <ol class="pl-10 list-disc">
+                <li>Mallis olevad loogikatehted</li>
+                <li>Mallis olevad muutujad asendatakse</li>
+            </ol>
+        </li>
+    </ul>
+
+    <h2>Ülesanded</h2>
+
+    <ul class="list-disc">
+        <li>Lisa</li>
+    </ul>
+
+</div>
+
+{% endblock %}

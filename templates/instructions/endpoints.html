@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Otspunktid{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Otspunktid</h1>
+
+<div class="bg-white shadow-lg rounded-xl p-6">
+    <p class="mb-4">Otspunktid on URL-id, mille kaudu kasutajad ja kliendid saavad suhelda serveriga. Iga otspunkt on seotud konkreetse funktsiooniga, mis täidab teatud ülesande, näiteks andmete salvestamine andmebaasi.</p>
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Koodinäide</h2>
+
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-python"><code>@bp.route('/hello')
+def hello():
+    return "Hello, World!"</code></pre>
+
+    <p class="mt-4">See näide näitab, kuidas luua lihtne otspunkt, mis tagastab teksti "Hello, World!".</p>
+    <p>Ava <a class="text-blue-500 hover:underline" href="/hello" target="_blank">/hello</a> otspunkt, et näha vastust.</p>
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Kasutaja parameetrite edastamine</h2>
+    <p class="mt-4">Kasutaja parameetreid saab edastada URL-i kaudu, kasutades päringu stringi. Näiteks, kui soovite edastada nime ja e-posti aadressi, võite kasutada järgmist URL-i:</p>
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-shell"><code>http://localhost:8080/hello?name=John&email=john%40example.com</code></pre>
+    <p class="mt-4">Server saab neid parameetreid lugeda ja vastata vastavalt. Vaatame, kuidas saame neid parameetreid töödelda meie otspunktis:</p>
+
+    <pre class="bg-gray-300 p-4 rounded-lg overflow-x-auto language-python"><code>from flask import request
+
+@bp.route('/hello')
+def hello():
+    name = request.args.get('name', 'World')
+    email = request.args.get('email', '')
+    return f"Hello, {name}! Your email is {email}."</code></pre>
+    <p class="mt-4">Nüüd, kui külastate URL-i <a class="text-blue-500 hover:underline" href="http://localhost:8080/hello?name=John&email=john%40example.com" target="_blank">http://localhost:8080/hello?name=John&email=john%40example.com</a>, näete vastust "Hello, John! Your email is john@example.com."</p>
+
+    <h2 class="text-xl font-bold mt-6 mb-4">Lisame uue otspunkti faili <code>hello.py</code></h2>
+
+    <ul class="list-disc list-inside space-y-2">
+        <li>Lisa faili <code>hello.py</code> otspunkt <code>/multiply</code>, mis võtab päringust parameetrid <code>a</code> ja <code>b</code> ning tagastab nende korrutise.</li>
+    </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Veebiarenduse töötuba{% endblock %}</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/language-jinja2.min.js"></script>
+
+  <script>hljs.highlightAll();</script>
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-screen bg-gray-100 flex flex-col">
+
+  <header class="text-5xl bg-white shadow pt-10 lg:pt-0 lg:text-base">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between flex-row items-start">
+      <a href="{{ url_for('home') }}" class="font-semibold text-gray-800">
+        🐍 Python Web Workshop
+      </a>
+
+      <nav class="space-x-4 text-5xl flex flex-col lg:flex-row lg:text-base text-right">
+
+        <a href="{{ url_for('home') }}" class="text-gray-600 hover:text-gray-900">
+          Home
+        </a>
+
+        {% if session.username %}
+          <span class="text-gray-500">
+            Hello, <strong>{{ session.username }}</strong>
+          </span>
+          <a href="{{ url_for('auth.logout') }}" class="text-red-600 hover:text-red-700">
+            Logout
+          </a>
+        {% else %}
+          <a href="{{ url_for('auth.login') }}" class="text-blue-600 hover:text-blue-700">
+            Login
+          </a>
+          <a href="{{ url_for('auth.signup') }}" class="text-green-600 hover:text-green-700">
+            Sign up
+          </a>
+        {% endif %}
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="flex-1">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t">
+    <div class="max-w-5xl mx-auto px-4 py-4 text-xs text-gray-400 text-center">
+      © {{ year if year is defined else "2025" }} Python Web Workshop
+    </div>
+  </footer>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>
